@@ -19,12 +19,13 @@ public class MemberController {
 
     @GetMapping("/members/new")
     public String createForm(Model model) {
-        model.addAttribute("member", new Member());
+        model.addAttribute("memberForm", new MemberForm());
         return "members/createMemberForm";
     }
 
     @PostMapping("/members/new")
-    public String create(@ModelAttribute Member member) {
+    public String create(@ModelAttribute MemberForm memberForm) {
+        Member member = new Member(memberForm.getName());
         memberService.join(member);
         return "redirect:/members";
     }
